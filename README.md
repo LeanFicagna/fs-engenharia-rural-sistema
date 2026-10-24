@@ -1,5 +1,7 @@
 # FS Rural — painel de solicitações
 
+[![CI](https://github.com/LeanFicagna/fs-engenharia-rural-sistema/actions/workflows/ci.yml/badge.svg)](https://github.com/LeanFicagna/fs-engenharia-rural-sistema/actions/workflows/ci.yml)
+
 Painel interno da **FS Consultoria Rural** para receber e acompanhar os pedidos de
 atendimento enviados pelo formulário da landing page.
 
@@ -30,6 +32,8 @@ Para rodar os testes:
 ```bash
 python manage.py test
 ```
+
+O GitHub Actions roda os mesmos testes a cada push na `main` e em pull requests.
 
 ## Formulário da landing page
 
