@@ -1,7 +1,20 @@
+# Python
 __pycache__/
 *.py[cod]
 .venv/
 venv/
+
+# Banco local e arquivos gerados
 db.sqlite3
-.env
+db.sqlite3-journal
 staticfiles/
+*.log
+
+# Segredos e credenciais: nunca vão para o Git
+.env
+.env.*
+!.env.example
+credenciais-locais.txt
+
+# Configuração local do Claude Code
+.claude/
