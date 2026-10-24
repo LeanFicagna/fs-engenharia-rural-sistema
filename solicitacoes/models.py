@@ -1,6 +1,7 @@
 from django.conf import settings
 from django.core.validators import RegexValidator
 from django.db import models
+from django.utils import timezone
 
 UFS = [
     "AC", "AL", "AP", "AM", "BA", "CE", "DF", "ES", "GO", "MA", "MT", "MS", "MG", "PA",
@@ -48,7 +49,10 @@ class Solicitacao(models.Model):
     )
     observacoes = models.TextField("observações", blank=True)
 
-    criada_em = models.DateTimeField(auto_now_add=True)
+    # Pedidos importados da planilha guardam a data original do envio
+    criada_em = models.DateTimeField(default=timezone.now)
+    # Identifica a linha da planilha de onde veio o pedido, para não importar duas vezes
+    chave_planilha = models.CharField(max_length=400, unique=True, null=True, blank=True, editable=False)
     atualizada_em = models.DateTimeField(auto_now=True)
 
     class Meta:

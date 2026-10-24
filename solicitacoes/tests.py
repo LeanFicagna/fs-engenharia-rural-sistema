@@ -1,11 +1,15 @@
+import io
 import json
+from datetime import datetime, timezone
+from unittest.mock import patch
 
 from django.contrib.auth.models import User
 from django.core.cache import cache
-from django.test import TestCase
+from django.test import TestCase, override_settings
 from django.urls import reverse
 
 from .models import Solicitacao
+from .planilha import importar_da_planilha
 
 SENHA = "senha-de-teste-123"
 
@@ -105,3 +109,46 @@ class SolicitacoesTests(TestCase):
         self.assertTrue(solicitacao.agricultor_familiar)
         self.assertEqual(solicitacao.servico, Solicitacao.Servico.CREDITO_RURAL)
         self.assertEqual(solicitacao.atendente, self.atendente)
+
+
+def resposta_da_planilha(solicitacoes):
+    return io.BytesIO(json.dumps({"ok": True, "total": len(solicitacoes), "solicitacoes": solicitacoes}).encode())
+
+
+LINHA_VALIDA = {
+    "id": 2,
+    "data": "Wed Oct 14 2026 11:29:26 GMT-0300 (Horário Padrão de Brasília)",
+    "nome": "Pedro Lima",
+    "email": "pedro@example.com",
+    "cidade": "Placas",
+    "uf": "PA",
+    "telefone": "(93) 99123-4567",
+    "mensagem": "Georreferenciamento do lote.",
+}
+
+
+@override_settings(PLANILHA_URL="https://planilha.example/exec", PLANILHA_TOKEN="token-de-teste")
+class ImportacaoPlanilhaTests(TestCase):
+    def test_importa_linhas_validas_uma_vez_so(self):
+        linha_invalida = {**LINHA_VALIDA, "id": 3, "email": "outra@example.com", "telefone": "123"}
+
+        with patch("solicitacoes.planilha.urlopen", side_effect=lambda *a, **k: resposta_da_planilha([LINHA_VALIDA, linha_invalida])) as urlopen:
+            primeira = importar_da_planilha()
+            segunda = importar_da_planilha()
+
+        self.assertIn("token=token-de-teste", urlopen.call_args.args[0])
+        self.assertEqual((primeira.criadas, len(primeira.invalidas)), (1, 1))
+        self.assertEqual((segunda.criadas, segunda.ja_importadas), (0, 1))
+
+        solicitacao = Solicitacao.objects.get()
+        self.assertEqual(solicitacao.nome, "Pedro Lima")
+        self.assertEqual(solicitacao.criada_em, datetime(2026, 10, 14, 14, 29, 26, tzinfo=timezone.utc))
+
+    @override_settings(PLANILHA_TOKEN="")
+    def test_botao_avisa_quando_token_nao_esta_configurado(self):
+        self.client.force_login(User.objects.create_user("maria", password=SENHA))
+
+        resposta = self.client.post(reverse("importar-planilha"), follow=True)
+
+        self.assertContains(resposta, "Configure PLANILHA_URL e PLANILHA_TOKEN")
+        self.assertFalse(Solicitacao.objects.exists())

@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 {% block title %}Solicitações{% endblock %}
 {% block content %}
-  <h1>Solicitações</h1>
+  <div class="titulo">
+    <h1>Solicitações</h1>
+    <form method="post" action="{% url 'importar-planilha' %}">
+      {% csrf_token %}
+      <button type="submit">Importar da planilha</button>
+    </form>
+  </div>
 
   <form method="get" class="filtros">
     <div>

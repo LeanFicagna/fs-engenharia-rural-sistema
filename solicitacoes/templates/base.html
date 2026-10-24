@@ -17,6 +17,9 @@
     input, select, textarea { padding: .4rem; font: inherit; }
     button { padding: .45rem .9rem; font: inherit; cursor: pointer; }
     .mensagem { background: #e3f1e4; border: 1px solid #9fc8a3; padding: .5rem 1rem; margin-bottom: 1rem; }
+    .mensagem.warning { background: #fdf3dc; border-color: #e2c27a; }
+    .mensagem.error { background: #fbe4e2; border-color: #e0a19b; }
+    .titulo { display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; }
     .erro { color: #a3241b; }
     .campo { margin-bottom: .9rem; }
     dl { display: grid; grid-template-columns: max-content 1fr; gap: .25rem 1rem; background: #fff; padding: 1rem; }
@@ -34,7 +37,7 @@
     {% endif %}
   </header>
   <main>
-    {% for message in messages %}<div class="mensagem">{{ message }}</div>{% endfor %}
+    {% for message in messages %}<div class="mensagem {{ message.tags }}">{{ message }}</div>{% endfor %}
     {% block content %}{% endblock %}
   </main>
 </body>

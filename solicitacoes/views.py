@@ -2,9 +2,11 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
+from django.views.decorators.http import require_POST
 
 from .forms import AtendimentoForm
 from .models import Solicitacao
+from .planilha import ErroPlanilha, importar_da_planilha
 
 
 @login_required
@@ -52,3 +54,21 @@ def atendimento(request: HttpRequest, pk: int) -> HttpResponse:
         "solicitacoes/atendimento.html",
         {"solicitacao": solicitacao, "form": form},
     )
+
+
+@login_required
+@require_POST
+def importar_planilha(request: HttpRequest) -> HttpResponse:
+    try:
+        resultado = importar_da_planilha()
+    except ErroPlanilha as erro:
+        messages.error(request, str(erro))
+        return redirect("lista")
+
+    messages.success(
+        request,
+        f"Planilha importada: {resultado.criadas} nova(s), {resultado.ja_importadas} já estavam no painel.",
+    )
+    for aviso in resultado.invalidas:
+        messages.warning(request, f"Ignorada — {aviso}")
+    return redirect("lista")

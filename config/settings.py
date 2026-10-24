@@ -1,7 +1,12 @@
 import os
 from pathlib import Path
 
+from dotenv import load_dotenv
+
 BASE_DIR = Path(__file__).resolve().parent.parent
+
+# Variáveis locais (segredos) ficam no .env, fora do Git; veja .env.example
+load_dotenv(BASE_DIR / ".env")
 
 # Em produção, defina DJANGO_SECRET_KEY, DJANGO_DEBUG=0 e DJANGO_ALLOWED_HOSTS
 SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY", "dev-inseguro-troque-em-producao")
@@ -74,3 +79,7 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 LOGIN_URL = "login"
 LOGIN_REDIRECT_URL = "lista"
 LOGOUT_REDIRECT_URL = "login"
+
+# Apps Script da planilha onde a landing registra os pedidos (leitura protegida por token)
+PLANILHA_URL = os.environ.get("PLANILHA_URL", "")
+PLANILHA_TOKEN = os.environ.get("PLANILHA_TOKEN", "")

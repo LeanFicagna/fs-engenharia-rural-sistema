@@ -7,6 +7,7 @@ from .forms import LoginComBloqueioForm
 urlpatterns = [
     path("", views.lista, name="lista"),
     path("solicitacoes/<int:pk>/", views.atendimento, name="atendimento"),
+    path("importar-planilha/", views.importar_planilha, name="importar-planilha"),
     path("api/solicitacoes/", api.criar_solicitacao, name="api-criar-solicitacao"),
     path(
         "entrar/",
