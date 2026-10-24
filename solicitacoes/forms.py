@@ -42,3 +42,16 @@ class LoginComBloqueioForm(AuthenticationForm):
 
         cache.delete(chave)
         return cleaned_data
+
+
+class AtendimentoForm(forms.ModelForm):
+    """Campos que a equipe atualiza durante o atendimento."""
+
+    class Meta:
+        model = Solicitacao
+        fields = ["status", "agricultor_familiar", "servico", "atendente", "observacoes"]
+        widgets = {"observacoes": forms.Textarea(attrs={"rows": 4, "cols": 60})}
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["atendente"].queryset = self.fields["atendente"].queryset.filter(is_active=True)

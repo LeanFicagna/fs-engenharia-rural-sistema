@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% block title %}Solicitações{% endblock %}
+{% block content %}
+  <h1>Solicitações</h1>
+
+  <form method="get" class="filtros">
+    <div>
+      <label for="status">Status</label>
+      <select name="status" id="status">
+        <option value="">Todos</option>
+        {% for valor, rotulo in opcoes_status %}
+          <option value="{{ valor }}"{% if valor == status_escolhido %} selected{% endif %}>{{ rotulo }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <div>
+      <label for="cidade">Cidade</label>
+      <input type="search" name="cidade" id="cidade" value="{{ cidade_escolhida }}" list="cidades">
+      <datalist id="cidades">{% for c in cidades %}<option value="{{ c }}">{% endfor %}</datalist>
+    </div>
+    <button type="submit">Filtrar</button>
+    {% if status_escolhido or cidade_escolhida %}<a href="{% url 'lista' %}">Limpar</a>{% endif %}
+  </form>
+
+  <table>
+    <thead>
+      <tr><th>Recebida</th><th>Nome</th><th>Cidade/UF</th><th>Telefone</th><th>Serviço</th><th>Status</th><th>Atendente</th><th></th></tr>
+    </thead>
+    <tbody>
+      {% for s in solicitacoes %}
+        <tr>
+          <td>{{ s.criada_em|date:"d/m/Y H:i" }}</td>
+          <td>{{ s.nome }}</td>
+          <td>{{ s.cidade }}/{{ s.uf }}</td>
+          <td>{{ s.telefone }}</td>
+          <td>{{ s.get_servico_display|default:"—" }}</td>
+          <td>{{ s.get_status_display }}</td>
+          <td>{{ s.atendente|default:"—" }}</td>
+          <td><a href="{% url 'atendimento' s.pk %}">Atender</a></td>
+        </tr>
+      {% empty %}
+        <tr><td colspan="8">Nenhuma solicitação encontrada.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}

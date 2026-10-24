@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ solicitacao.nome }}{% endblock %}
+{% block content %}
+  <p><a href="{% url 'lista' %}">← Voltar para a lista</a></p>
+  <h1>{{ solicitacao.nome }}</h1>
+
+  <dl>
+    <dt>Recebida em</dt><dd>{{ solicitacao.criada_em|date:"d/m/Y H:i" }}</dd>
+    <dt>E-mail</dt><dd>{{ solicitacao.email }}</dd>
+    <dt>Telefone</dt><dd>{{ solicitacao.telefone }}</dd>
+    <dt>Cidade/UF</dt><dd>{{ solicitacao.cidade }}/{{ solicitacao.uf }}</dd>
+    <dt>Mensagem</dt><dd>{{ solicitacao.mensagem|linebreaksbr }}</dd>
+  </dl>
+
+  <h2>Atendimento</h2>
+  <form method="post">
+    {% csrf_token %}
+    {% for campo in form %}
+      <div class="campo">
+        {{ campo.label_tag }} {{ campo }}
+        {% for erro in campo.errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+      </div>
+    {% endfor %}
+    <button type="submit">Salvar</button>
+  </form>
+{% endblock %}
