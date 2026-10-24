@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Entrar{% endblock %}
+{% block content %}
+  <h1>Entrar</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for erro in form.non_field_errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+    <div class="campo">{{ form.username.label_tag }} {{ form.username }}</div>
+    <div class="campo">{{ form.password.label_tag }} {{ form.password }}</div>
+    <input type="hidden" name="next" value="{{ next }}">
+    <button type="submit">Entrar</button>
+  </form>
+{% endblock %}
