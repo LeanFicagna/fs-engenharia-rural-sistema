@@ -1,10 +1,11 @@
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.core.exceptions import PermissionDenied
 from django.http import HttpRequest, HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.views.decorators.http import require_POST
 
-from .forms import AtendimentoForm
+from .forms import AtendimentoForm, CadastroUsuarioForm
 from .models import Solicitacao
 from .planilha import ErroPlanilha, importar_da_planilha
 
@@ -72,3 +73,24 @@ def importar_planilha(request: HttpRequest) -> HttpResponse:
     for aviso in resultado.invalidas:
         messages.warning(request, f"Ignorada — {aviso}")
     return redirect("lista")
+
+
+@login_required
+def cadastrar_usuario(request: HttpRequest) -> HttpResponse:
+    # Só administrador; usuário comum logado recebe 403
+    if not request.user.is_superuser:
+        raise PermissionDenied
+
+    if request.method == "POST":
+        form = CadastroUsuarioForm(request.POST)
+        if form.is_valid():
+            usuario = form.save()
+            messages.success(
+                request,
+                f"{usuario.first_name} cadastrado(a). O login é feito com o e-mail {usuario.email}.",
+            )
+            return redirect("lista")
+    else:
+        form = CadastroUsuarioForm()
+
+    return render(request, "usuarios/cadastro.html", {"form": form})

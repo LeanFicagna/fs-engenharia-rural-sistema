@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Cadastrar usuário{% endblock %}
+{% block content %}
+  <p><a href="{% url 'lista' %}">← Voltar para a lista</a></p>
+  <h1>Cadastrar usuário da equipe</h1>
+  <form method="post">
+    {% csrf_token %}
+    {% for erro in form.non_field_errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+    {% for campo in form %}
+      <div class="campo">
+        {{ campo.label_tag }} {{ campo }}
+        {% if campo.help_text %}<div class="ajuda">{{ campo.help_text|safe }}</div>{% endif %}
+        {% for erro in campo.errors %}<p class="erro">{{ erro }}</p>{% endfor %}
+      </div>
+    {% endfor %}
+    <button type="submit">Cadastrar</button>
+  </form>
+{% endblock %}

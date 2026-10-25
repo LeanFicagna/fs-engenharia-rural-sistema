@@ -152,3 +152,45 @@ class ImportacaoPlanilhaTests(TestCase):
 
         self.assertContains(resposta, "Configure PLANILHA_URL e PLANILHA_TOKEN")
         self.assertFalse(Solicitacao.objects.exists())
+
+
+class CadastroUsuarioTests(TestCase):
+    def setUp(self):
+        cache.clear()
+
+    def test_admin_cadastra_usuario_que_entra_e_ve_solicitacoes(self):
+        admin = User.objects.create_superuser("admin", "admin@example.com", SENHA)
+        self.client.force_login(admin)
+        senha_nova = "Pronaf-Santarem-2026"
+
+        resposta = self.client.post(
+            reverse("cadastrar-usuario"),
+            {"first_name": "Lucas", "email": "Lucas@Example.com", "password1": senha_nova, "password2": senha_nova},
+        )
+
+        self.assertRedirects(resposta, reverse("lista"))
+        usuario = User.objects.get(username="lucas@example.com")
+        self.assertEqual(usuario.first_name, "Lucas")
+        self.assertFalse(usuario.is_superuser)
+        # Senha guardada com hash, nunca em texto puro
+        self.assertNotEqual(usuario.password, senha_nova)
+        self.assertTrue(usuario.check_password(senha_nova))
+
+        # O novo usuário entra com o e-mail e vê a lista de solicitações
+        self.client.logout()
+        resposta = self.client.post(reverse("login"), {"username": "lucas@example.com", "password": senha_nova})
+        self.assertRedirects(resposta, reverse("lista"))
+        self.assertContains(self.client.get(reverse("lista")), "Solicitações")
+
+    def test_usuario_comum_nao_acessa_cadastro(self):
+        self.client.force_login(User.objects.create_user("maria", password=SENHA))
+        senha_nova = "Pronaf-Santarem-2026"
+
+        self.assertEqual(self.client.get(reverse("cadastrar-usuario")).status_code, 403)
+        resposta = self.client.post(
+            reverse("cadastrar-usuario"),
+            {"first_name": "Intruso", "email": "intruso@example.com", "password1": senha_nova, "password2": senha_nova},
+        )
+
+        self.assertEqual(resposta.status_code, 403)
+        self.assertFalse(User.objects.filter(email="intruso@example.com").exists())

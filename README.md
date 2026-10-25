@@ -7,6 +7,8 @@ atendimento enviados pelo formulário da landing page.
 
 - `POST /api/solicitacoes/` recebe o formulário do site e valida os dados no servidor.
 - A equipe entra com login (bloqueado por 15 minutos após 5 tentativas erradas).
+- O administrador cadastra novos usuários da equipe em **Cadastrar usuário**
+  (nome, e-mail e senha); o novo usuário entra com o e-mail.
 - Os pedidos que a landing registra na planilha do Google são importados pelo botão
   **Importar da planilha** (ou pelo comando `importar_planilha`).
 - A lista de pedidos pode ser filtrada por status e cidade; cada pedido tem uma tela
@@ -24,7 +26,7 @@ source .venv/bin/activate        # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
 cp .env.example .env             # preencha o PLANILHA_TOKEN
 python manage.py migrate
-python manage.py createsuperuser # cria o primeiro usuário da equipe
+python manage.py createsuperuser # cria o administrador; os demais ele cadastra pelo painel
 python manage.py runserver
 ```
 
@@ -59,6 +61,9 @@ python manage.py importar_planilha
 
 Cada linha é validada como no formulário e importada uma vez só (a chave é data do
 envio + e-mail). Linhas inválidas são ignoradas e listadas no aviso.
+
+Para usar outro arquivo de banco (por exemplo, um banco só com dados fictícios),
+defina `DJANGO_DB_PATH` com o caminho do arquivo.
 
 ## Produção
 
