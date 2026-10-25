@@ -62,6 +62,9 @@ python manage.py importar_planilha
 Cada linha é validada como no formulário e importada uma vez só (a chave é data do
 envio + e-mail). Linhas inválidas são ignoradas e listadas no aviso.
 
+Para usar outro arquivo de banco (por exemplo, um banco só com dados fictícios),
+defina `DJANGO_DB_PATH` com o caminho do arquivo.
+
 ## Produção
 
 Defina as variáveis `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=0`, `DJANGO_ALLOWED_HOSTS`,
