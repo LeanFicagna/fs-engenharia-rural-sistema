@@ -30,7 +30,8 @@ python manage.py createsuperuser # cria o administrador; os demais ele cadastra 
 python manage.py runserver
 ```
 
-Acesse <http://127.0.0.1:8000/> e entre com o usuário criado.
+Acesse <http://127.0.0.1:8000/painel/> e entre com o usuário criado. A raiz
+<http://127.0.0.1:8000/> mostra a landing page.
 
 Para rodar os testes:
 
@@ -77,6 +78,9 @@ estáticos, sem build. O site publicado em <https://www.fsengenhariarural.com.br
 sendo servido pelo GitHub Pages a partir do repositório
 [LeanFicagna/fs-engenharia_web-site](https://github.com/LeanFicagna/fs-engenharia_web-site)
 (branch `develop`); esta pasta é uma cópia dele e pode ficar desatualizada.
+
+O Django também serve essa pasta na raiz: `/` é a landing (via WhiteNoise, `WHITENOISE_ROOT`),
+`/painel/` é o painel da equipe, `/api/solicitacoes/` recebe o formulário e `/admin/` é o admin.
 
 O formulário da landing envia cada pedido ao Google Apps Script (`landing/apps-script/`),
 que grava na planilha. O painel traz esses pedidos pelo botão **Importar da planilha**.
