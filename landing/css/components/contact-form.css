@@ -1,0 +1,188 @@
+/* --- ÁREA DO FORMULÁRIO (Direita) --- */
+.contact-form {
+	width: 100%;
+	padding: 2rem 1.5rem;
+	background-color: var(--surface-default);
+	font-size: 1rem;
+}
+
+.form-header {
+	margin: 0 1rem;
+	text-align: left;
+}
+
+.title {
+	color: var(--color-neutral-10);
+	padding-top: 0;
+	font-size: 1.5rem;
+	font-weight: 700;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+}
+
+/* Organização dos inputs (Grid) */
+.form-grid {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.4rem;
+	flex: 1;
+}
+
+/* Estilização individual dos campos de entrada */
+.input-box label {
+	font-weight: 600;
+	color: var(--color-neutral-10);
+	margin-bottom: 5px;
+	display: block;
+	font-size: 0.8rem;
+	letter-spacing: 0.04em;
+	text-transform: uppercase;
+}
+
+.input-box input,
+.input-box select,
+.input-box textarea {
+	width: 100%;
+	padding: 0.75rem 0.9rem;
+	font-size: 0.95rem;
+	background-color: var(--color-neutral-40);
+	border: 0;
+	border-bottom: 2px solid #d4d4d4; /* fica verde-lima com o foco */
+	border-radius: 0.35rem 0.35rem 0 0;
+	transition: all 0.3s ease;
+}
+
+/* Estados de interação dos inputs */
+.input-box input:focus,
+.input-box select:focus,
+.input-box textarea:focus {
+	outline: none;
+	border-bottom-color: var(--color-logo-green);
+}
+
+/* Comportamento específico para o campo de Mensagem (Textarea) */
+.input-message {
+	display: flex;
+	flex-direction: column;
+}
+
+.input-message textarea {
+	flex: 1;
+	resize: none;
+	min-height: 100px;
+}
+
+/* --- HONEYPOT, CONSENTIMENTO E STATUS --- */
+.form-honeypot {
+	position: absolute;
+	left: -9999px;
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+.form-consent {
+	display: flex;
+	align-items: flex-start;
+	gap: 0.5rem;
+	margin: 1rem 1rem 0;
+	font-size: 0.75rem;
+	color: #757575; /* cinza dos placeholders dos campos */
+}
+
+.form-consent input {
+	margin-top: 0.15rem;
+	flex-shrink: 0;
+	accent-color: var(--color-logo-green);
+	cursor: pointer;
+}
+
+.form-status {
+	margin: 0 1rem 1rem;
+	min-height: 1.2em;
+	text-align: center;
+	font-size: 0.85rem;
+	color: var(--color-neutral-10);
+}
+
+.form-status--error {
+	color: #b3261e;
+}
+
+/* --- BOTÃO DE AÇÃO --- */
+#solicite-button {
+	margin-top: auto;
+	margin: 1rem;
+}
+
+#solicite-button button {
+	width: 100%;
+	background-color: var(--color-logo-green);
+	color: white;
+	border: none;
+	padding: 1rem;
+	border-radius: 0.35rem;
+	font-weight: 600;
+	font-size: 0.95rem;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+	cursor: pointer;
+	transition:
+		transform 0.2s,
+		background 0.3s;
+}
+
+#solicite-button button:disabled {
+	opacity: 0.7;
+	cursor: not-allowed;
+}
+
+#solicite-button button:not(:disabled):hover {
+	background-color: #68a818;
+	transform: translateY(-2px);
+}
+
+@media (min-width: 540px) {
+	/* Posição de cada campo na grade: 1 nome, 2 email, 3 cidade, 4 estado, 5 telefone, 6 mensagem */
+	.input-box:nth-child(1) {
+		grid-column: span 2;
+	}
+
+	.input-box:nth-child(2),
+	.input-box:nth-child(3),
+	.input-box:nth-child(4),
+	.input-box:nth-child(5) {
+		grid-column: span 1;
+	}
+
+	.input-box:nth-child(6) {
+		grid-column: span 2;
+	}
+
+	.form-grid {
+		row-gap: 0.5rem;
+		padding: 1rem;
+	}
+
+	.input-box textarea {
+		min-height: 150px;
+	}
+}
+
+@media (min-width: 992px) {
+	.form-grid {
+		grid-template-columns: 1fr 1fr;
+		grid-template-rows: auto auto 1fr;
+	}
+
+	/* Nome, email e telefone ocupam a largura toda; cidade e estado ficam lado a lado */
+	.input-box:nth-child(2) {
+		grid-column: span 2;
+	}
+
+	.input-box:nth-child(5) {
+		grid-column: span 2;
+		display: flex;
+		flex-direction: column;
+	}
+}

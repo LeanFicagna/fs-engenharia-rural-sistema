@@ -1,7 +1,7 @@
 from django.contrib.auth import views as auth_views
 from django.urls import path
 
-from . import api, views
+from . import views
 from .forms import LoginComBloqueioForm
 
 urlpatterns = [
@@ -9,7 +9,6 @@ urlpatterns = [
     path("solicitacoes/<int:pk>/", views.atendimento, name="atendimento"),
     path("importar-planilha/", views.importar_planilha, name="importar-planilha"),
     path("usuarios/novo/", views.cadastrar_usuario, name="cadastrar-usuario"),
-    path("api/solicitacoes/", api.criar_solicitacao, name="api-criar-solicitacao"),
     path(
         "entrar/",
         auth_views.LoginView.as_view(authentication_form=LoginComBloqueioForm),

@@ -1,0 +1,32 @@
+.about-section {
+  padding: 2rem 1rem;
+}
+
+.about-section__layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+}
+
+.about-section__content h1,
+.about-section__content h2,
+.about-section__content h3,
+.about-section__content h4,
+.about-section__content p {
+  color: black;
+}
+
+/* Texto justificado */
+.about-section__content p {
+  text-align: justify;
+  -webkit-hyphens: auto; /* divide palavras longas (pt-br, do <html lang>) e evita buracos entre as palavras */
+  hyphens: auto;
+}
+
+@media (max-width: 768px) {
+  .about-section__layout {
+    grid-template-columns: 1fr;
+  }
+}

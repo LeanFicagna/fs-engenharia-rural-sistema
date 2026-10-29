@@ -1,0 +1,33 @@
+.contact-section {
+	background-color: var(--color-neutral-10);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 4rem 1rem;
+	background:
+		linear-gradient(rgba(23, 23, 23, 0.85), rgba(23, 23, 23, 0.95)),
+		url("../../img/fundos/milharal.webp") center / cover;
+}
+
+.contact-section p {
+	color: var(--color-neutral-10);
+}
+
+/* --- ESTRUTURA DO CARD PRINCIPAL --- */
+.contact-card {
+	display: grid;
+	grid-template-columns: 1fr;
+	width: 100%;
+	max-width: 1200px;
+	background-color: var(--surface-default);
+	border-radius: 0.5rem;
+	overflow: hidden;
+	box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+	margin: 0;
+}
+
+@media (min-width: 992px) {
+	.contact-card {
+		grid-template-columns: 1fr 1fr;
+	}
+}

@@ -1,0 +1,46 @@
+:root {
+  /* Fontes */
+  --font-primary: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-secondary: "Poppins", system-ui, sans-serif;
+
+  /* Tipografia */
+  --font-size-base: 16px;
+  --font-size-sm: 0.875rem;
+  --font-size-lg: 1.125rem;
+
+  --line-height-base: 1.6;
+  --line-height-heading: 1.2;
+
+  /* Cores Neutras */
+  --color-neutral-0: #0e0c0c;
+  --color-neutral-10: #171717;
+  --color-neutral-30: #a8a29e;
+  --color-neutral-40: #f5f5f5;
+
+  /* Marca */
+  --color-brand-primary: #0b6b3a;
+  --color-brand-secondary: #f2c94c;
+
+  /* Verde-lima da logo */
+  --color-logo-green: #78c020;
+
+  /* Acentos */
+  --color-accent-default: #ff9807;
+  --color-accent-soft: #92c58b;
+
+  /* Superfícies & Texto */
+  --surface-default: white;
+  --text-default: #343a40;
+
+  /* Bordas */
+  --color-border-accent: var(--color-accent-default);
+
+  /* Componentes */
+  --button-primary-bg: #f4c430;
+  --button-primary-text: var(--color-neutral-0);
+
+  /* Navbar */
+  --navbar-height: 92px;
+  --navbar-bg: var(--color-neutral-10);
+  --navbar-z-index: 1000;
+}

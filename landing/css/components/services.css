@@ -1,0 +1,162 @@
+/* SEÇÃO SERVIÇOS */
+.services-section {
+    padding: 4rem 1rem 3rem;
+}
+
+.services-section__header {
+    max-width: 1200px;
+    margin: 0 auto 2rem;
+}
+
+.services-section__header h2 {
+    color: black;
+}
+
+/* SWIPER CONTAINER
+   O envoltório reserva as laterais para as setas, fora do carrossel (assim nenhum card aparece atrás delas).
+   O carrossel reserva embaixo o espaço das bolinhas; o seletor com a seção ganha do "padding: 0"
+   do CSS do Swiper, que carrega depois. */
+.services-carousel-wrap {
+    position: relative;
+    max-width: calc(1200px + 6rem); /* os cards continuam com até 1200px, alinhados ao título */
+    margin: 0 auto;
+    padding: 0 3rem;
+}
+
+.services-section .services-carousel {
+    padding: 0 0 3rem;
+}
+
+/* CARD DE SERVIÇO */
+.service-card {
+    background: white;
+    border: 0;
+    border-bottom: 3px solid transparent; /* fica verde-lima no hover */
+    border-radius: 0.35rem;
+    overflow: hidden;
+    display: grid;
+    grid-template-rows: auto 1fr;
+    box-shadow: 0 0 0 1px #e5e5e5, 0 10px 30px rgba(23, 23, 23, 0.06);
+    transition: border-color 0.3s ease, transform 0.3s ease;
+    cursor: pointer;
+}
+
+.service-card:hover {
+    transform: translateY(-4px);
+    border-bottom-color: var(--color-logo-green);
+}
+
+/* IMAGEM */
+.service-card img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    display: block;
+}
+
+.services-carousel .swiper-slide {
+    height: auto;
+}
+
+/* o CSS do Swiper (carregado depois) troca o display dos cards por block; assim o conteúdo estica
+   até o fim do card e o "Ver detalhes" fica alinhado embaixo em todos */
+.services-carousel .service-card {
+    display: grid;
+}
+
+/* CONTEÚDO */
+.service-card__content {
+    padding: 1.25rem;
+    display: grid;
+    grid-template-rows: auto auto 1fr auto;
+    gap: 0.5rem;
+}
+
+/* o espaço entre título e texto fica só no gap acima */
+.service-card__content h3 {
+    margin-bottom: 0;
+}
+
+/* TEXTO */
+.service-card__content h3 {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--color-neutral-10);
+}
+
+.service-card__content p {
+    font-size: 0.95rem;
+    color: #444;
+}
+
+/* convite para abrir os detalhes do serviço (a janela é criada pelo script/service-details.js) */
+.service-card__content::after {
+    content: "Ver detalhes  →";
+    align-self: end;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-neutral-10);
+}
+/* SWIPER CONTROLES */
+/* bolinhas em traços verde-lima */
+.services-section .services-carousel .swiper-pagination-bullet {
+    width: 18px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--color-logo-green);
+    opacity: 0.4;
+}
+
+.services-carousel .swiper-pagination-bullet-active {
+    opacity: 1;
+}
+
+/* Setas no espaço lateral do envoltório, centralizadas na altura dos cards (descontando as bolinhas),
+   num quadrado cinza, no formato dos botões */
+.services-carousel-wrap {
+    --swiper-navigation-size: 18px; /* tamanho do ícone da seta */
+}
+
+.services-carousel-wrap .swiper-button-prev,
+.services-carousel-wrap .swiper-button-next {
+    top: calc(50% - 1.5rem);
+    width: 2.75rem;
+    height: 2.75rem;
+    margin-top: -1.375rem;
+    border-radius: 0.35rem;
+    background: var(--color-neutral-10);
+    color: white;
+    transition: background 0.3s ease;
+}
+
+.services-carousel-wrap .swiper-button-prev:hover,
+.services-carousel-wrap .swiper-button-next:hover {
+    background: var(--color-logo-green);
+}
+
+.services-carousel-wrap .swiper-button-prev {
+    left: 0.25rem;
+}
+
+.services-carousel-wrap .swiper-button-next {
+    right: 0.25rem;
+}
+
+/* Bolinhas no espaço de baixo, fora dos cards */
+.services-section .services-carousel .swiper-pagination {
+    bottom: 0.75rem;
+}
+
+/* No celular, sem setas (o carrossel é arrastado com o dedo) e sem espaço lateral */
+@media (max-width: 600px) {
+    .services-carousel-wrap {
+        padding: 0;
+    }
+
+    .services-carousel-wrap .swiper-button-prev,
+    .services-carousel-wrap .swiper-button-next {
+        display: none;
+    }
+}

@@ -1,0 +1,29 @@
+.value-card {
+  color: white;
+  padding: 1.5rem 2rem;
+}
+
+.value-card h3 {
+  margin-bottom: 1rem;
+}
+
+.value-card p {
+  text-align: justify;
+  -webkit-hyphens: auto; /* divide palavras longas (pt-br, do <html lang>) e evita buracos entre as palavras */
+  hyphens: auto;
+}
+
+/* Variantes */
+.value-card--top {
+  background: #1f5200;
+  border-top-left-radius: 40px;
+}
+
+.value-card--middle {
+  background: #2b7d00;
+}
+
+.value-card--bottom {
+  background: #3f9a0a;
+  border-bottom-right-radius: 40px;
+}

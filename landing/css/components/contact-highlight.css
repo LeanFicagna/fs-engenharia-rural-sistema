@@ -1,0 +1,119 @@
+/* --- COLUNA DA ESQUERDA (Destaque/Imagem) --- */
+.contact-highlight {
+	display: flex;
+	padding: 5px;
+	justify-items: center;
+	align-items: start;
+	flex: 1;
+	background:
+		linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255)),
+		url("../../img/fundos/mapeamento.webp");
+	background-size: cover;
+}
+
+.highlight-image {
+	padding-left: 10px;
+	padding-top: 7px;
+}
+
+.highlight-image img {
+	max-width: 100%;
+	height: auto;
+	width: 400px;
+}
+
+.contact-highlight h3 {
+	color: var(--color-neutral-10);
+	font-size: 1rem;
+	text-transform: uppercase;
+	letter-spacing: 1px;
+	text-align: center;
+	padding-right: 20px;
+	padding-top: 10px;
+}
+
+.contact-highlight p {
+	text-align: center;
+	font-size: 0.7rem;
+	padding-right: 20px;
+}
+
+@media (min-width: 540px) {
+	.contact-highlight {
+		background-image: url("../../img/fundos/mapeamento.webp");
+		padding: 10px;
+		justify-items: center;
+		align-items: center;
+		flex: 1;
+		background:
+			linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255)),
+			url("../../img/fundos/mapeamento.webp");
+		background-size: cover;
+	}
+
+	.contact-highlight h3 {
+		padding: 10px;
+		font-size: 1.5rem;
+	}
+
+	.contact-highlight p {
+		text-align: center;
+		font-size: 1rem;
+	}
+
+	.highlight-image img {
+		max-width: 100%;
+		height: auto;
+		width: 300px;
+	}
+}
+
+@media (min-width: 992px) {
+	.contact-highlight {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+		background:
+			linear-gradient(rgba(255, 255, 255, 0.5), rgba(255, 255, 255)),
+			url("../../img/fundos/mapeamento.webp");
+		background-size: cover;
+	}
+
+	.contact-highlight .highlight-image,
+	.highlight-content {
+		opacity: 100%;
+	}
+
+	.highlight-content {
+		align-self: center;
+		margin-top: 10px;
+	}
+}
+
+/* No celular o mapa (largura fixa) passava do cartão: mapa em cima e texto embaixo */
+@media (max-width: 539px) {
+	.contact-highlight {
+		flex-direction: column;
+		align-items: center;
+		padding: 1.5rem 1rem;
+		text-align: center;
+	}
+
+	.highlight-image {
+		padding: 0;
+	}
+
+	.highlight-image img {
+		width: 200px;
+	}
+
+	.contact-highlight h3,
+	.contact-highlight p {
+		padding-right: 0;
+	}
+
+	.contact-highlight p {
+		font-size: 0.9rem;
+	}
+}

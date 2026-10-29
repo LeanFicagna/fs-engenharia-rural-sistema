@@ -1,0 +1,103 @@
+.hero {
+  position: relative;
+  min-height: calc(100vh - var(--navbar-height));
+  overflow: hidden;
+
+  /* Conteúdo embaixo à esquerda, alinhado à coluna de 1200px */
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+/* Fotos de fundo: a lavoura de cacau fica sempre embaixo e a segunda foto aparece e some por cima
+   (ciclo de 14s, 7s cada), sem tela preta entre elas */
+.hero-slides span {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.hero-slides span:nth-child(1) {
+  background-image: url("../../img/hero/plantacao-cacau.webp");
+}
+
+.hero-slides span:nth-child(2) {
+  background-image: url("../../img/hero/caminho-ao-campo.webp");
+  background-position: 65% center; /* no celular, mantém a pessoa no enquadramento */
+  opacity: 0;
+  animation: heroFade 14s infinite ease-in-out;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(
+    0deg,
+    rgba(23, 23, 23, 0.95) 0%,
+    rgba(23, 23, 23, 0.55) 55%,
+    rgba(23, 23, 23, 0.3) 100%
+  );
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-align: left;
+  max-width: 720px;
+  margin-left: max(1rem, calc((100vw - 1200px) / 2));
+  padding: 0 1rem 5rem;
+}
+
+.hero-content h1 {
+  font-size: 3.2rem;
+  border-left: 4px solid var(--color-logo-green);
+  padding-left: 1rem;
+}
+
+/* Botão do hero: verde-lima da logo, sem transparência */
+.hero .btn--primary {
+  background: var(--color-logo-green);
+  color: white;
+}
+
+.hero .btn--primary:hover {
+  background: #68a818;
+}
+
+.hero-content h4 {
+  font-weight: 400;
+}
+
+@media (max-width: 768px) {
+  .hero-content h1 {
+    font-size: 2.2rem;
+  }
+}
+
+@keyframes heroFade {
+  0%,
+  40% {
+    opacity: 0;
+  }
+
+  50%,
+  90% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+/* Sem animação para quem prefere menos movimento: fica só a foto do cacau */
+@media (prefers-reduced-motion: reduce) {
+  .hero-slides span:nth-child(2) {
+    animation: none;
+  }
+}

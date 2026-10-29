@@ -1,0 +1,126 @@
+/* Trabalhos por serviço, dentro de Nossa Equipe e Projetos:
+   filtros em pílulas, uma foto grande do serviço selecionado e as outras como miniaturas clicáveis */
+
+.projects-block h4 {
+  margin-bottom: 1.5rem;
+}
+
+/* FILTROS */
+
+.projects-menu {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 0.5rem;
+  margin-bottom: 1.75rem;
+}
+
+.projects-menu button {
+  font-family: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.35rem 1rem;
+  border: 1px solid #444;
+  border-radius: 0.35rem; /* no formato dos botões */
+  background: #232323;
+  color: #ddd;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.projects-menu button:hover {
+  border-color: var(--color-logo-green);
+  color: white;
+}
+
+/* Serviço selecionado: verde-lima, como o botão do CTA */
+.projects-menu button.is-active,
+.projects-menu button.is-active:hover {
+  border-color: var(--color-logo-green);
+  background: var(--color-logo-green);
+  color: white;
+}
+
+/* FOTO GRANDE (criada pelo script/projects.js): quadro 16:9 com a imagem inteira, sem corte;
+   o que sobrar (fotos em pé, mapas) fica com fundo escuro sólido */
+
+.projects-main {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--color-neutral-0);
+  border-radius: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+/* MINIATURAS */
+
+.projects-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+/* miniaturas também em 16:9 e sem corte */
+.projects-grid img {
+  width: 110px;
+  height: auto;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  background: var(--color-neutral-0);
+  border-radius: 0.4rem;
+  opacity: 0.55;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.projects-grid img:hover {
+  opacity: 0.85;
+}
+
+.projects-grid img.is-current {
+  opacity: 1;
+  outline: 2px solid var(--color-logo-green);
+  outline-offset: 2px;
+}
+
+/* Mensagem para serviços sem fotos publicadas */
+.projects-empty {
+  margin-bottom: 2rem;
+  padding: 1.5rem;
+  text-align: center;
+  border: 1px dashed var(--color-logo-green);
+  border-radius: 0.8rem;
+}
+
+/* BOTÕES DE AÇÃO */
+
+.projects-cta {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 1rem;
+}
+
+/* RESPONSIVO */
+
+/* Telas pequenas: foto grande em 4:3 (as fotos em pé ficam maiores) e miniaturas em 4 colunas iguais,
+   para não sobrar uma sozinha na linha de baixo */
+@media (max-width: 600px) {
+  .projects-main {
+    aspect-ratio: 4 / 3;
+  }
+
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .projects-grid img {
+    width: 100%;
+  }
+}
