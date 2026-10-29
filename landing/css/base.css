@@ -1,0 +1,87 @@
+html {
+  font-size: var(--font-size-base);
+  scroll-behavior: smooth;
+}
+
+body {
+  margin-top: var(--navbar-height);
+  font-family: var(--font-primary);
+  line-height: var(--line-height-base);
+  color: var(--text-default);
+  background-color: var(--surface-default);
+  -webkit-font-smoothing: antialiased;
+}
+
+[id] {
+    scroll-margin-top: var(--navbar-height);
+}
+
+h1, h2, h3, h4, h5, h6, p, a {
+    color: white;
+}
+
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-secondary);
+  line-height: var(--line-height-heading);
+  font-weight: 500;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+}
+
+p {
+  margin-bottom: 1rem;
+}
+
+h1 {
+  font-size: 3rem;   /* 40px */
+}
+
+h2 {
+  font-size: 2.5rem;     /* 32px */
+}
+
+h3 {
+  font-size: 1.5rem;   /* 24px */
+}
+
+h4 {
+  font-size: 1.25rem;  /* 20px */
+}
+
+h5 {
+  font-size: 1.125rem; /* 18px */
+}
+
+h6 {
+  font-size: 1rem;     /* 16px */
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2.8rem;
+  }
+}
+
+@media (max-width: 426px) {
+  h1 {
+    font-size: 2.5rem;
+  }
+}
+
+/* Elementos com o atributo hidden somem mesmo quando outra regra define display */
+[hidden] {
+  display: none !important;
+}
+
+/* Títulos das seções: barra verde-lima à esquerda, como o título do hero */
+.about-section__content h2,
+.who-we-are__content h2,
+.services-section__header h2,
+.partners h2,
+.section-header h2 {
+  padding-left: 1rem;
+  border-left: 4px solid var(--color-logo-green);
+  font-size: 2.1rem;
+  font-weight: 700;
+}

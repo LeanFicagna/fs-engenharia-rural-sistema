@@ -69,3 +69,15 @@ defina `DJANGO_DB_PATH` com o caminho do arquivo.
 
 Defina as variáveis `DJANGO_SECRET_KEY`, `DJANGO_DEBUG=0`, `DJANGO_ALLOWED_HOSTS`,
 `PLANILHA_URL` e `PLANILHA_TOKEN` (no `.env` ou no ambiente do servidor).
+
+## Landing page
+
+O código da landing page da FS Consultoria Rural está em `landing/`: HTML, CSS e JS
+estáticos, sem build. O site publicado em <https://www.fsengenhariarural.com.br> continua
+sendo servido pelo GitHub Pages a partir do repositório
+[LeanFicagna/fs-engenharia_web-site](https://github.com/LeanFicagna/fs-engenharia_web-site)
+(branch `develop`); esta pasta é uma cópia dele e pode ficar desatualizada.
+
+O formulário da landing envia cada pedido ao Google Apps Script (`landing/apps-script/`),
+que grava na planilha. O painel traz esses pedidos pelo botão **Importar da planilha**.
+O token de leitura fica só nas propriedades do script e no `.env` do painel, nunca no código.

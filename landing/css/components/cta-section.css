@@ -1,0 +1,70 @@
+.cta-section {
+  margin: 2rem 1rem;
+}
+
+.cta-section__layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  align-items: center;
+}
+
+.cta-section__content {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  padding: 2.5rem;
+  border-radius: 2rem;
+}
+
+/* Foto espelhada na horizontal, ancorada no topo */
+.cta-section__content::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("../../img/fundos/lavoura-de-milho.webp") center top / cover no-repeat;
+  transform: scaleX(-1);
+}
+
+/* Degradê no cinza do footer_content; a máscara deixa o canto superior direito totalmente transparente */
+.cta-section__content::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(
+    30deg,
+    var(--color-neutral-10) 30%,
+    rgba(23, 23, 23, 0.45) 70%
+  );
+  -webkit-mask-image: radial-gradient(ellipse 75% 85% at 100% 0%, transparent 0%, #000 75%);
+  mask-image: radial-gradient(ellipse 75% 85% at 100% 0%, transparent 0%, #000 75%);
+}
+
+/* Botão no verde-lima da logo, igual ao do hero */
+.cta-section .btn--primary {
+  background: var(--color-logo-green);
+  color: white;
+}
+
+.cta-section .btn--primary:hover {
+  background: #68a818;
+}
+
+.cta-section h2 {
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.cta-section p {
+  margin-bottom: 1.5rem;
+  /* max-width: 700px; */
+}
+
+@media (max-width: 768px) {
+  .cta-section__content {
+    padding: 2rem;
+    text-align: center;
+  }
+}

@@ -1,0 +1,41 @@
+/* Quem somos: seção cinza, foto à esquerda e texto à direita */
+.who-we-are {
+  padding: 4rem 1rem;
+  background-color: var(--color-neutral-10);
+}
+
+.who-we-are__layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+}
+
+.who-we-are__image img {
+  aspect-ratio: 1 / 1;
+  width: 100%;
+  height: auto;
+  border-radius: 0.35rem;
+  object-fit: cover;
+}
+
+.who-we-are__content h2 {
+  margin-bottom: 1rem;
+  color: white;
+}
+
+.who-we-are__content p {
+  margin-bottom: 1rem;
+  color: rgba(255, 255, 255, 0.8);
+  text-align: justify;
+  -webkit-hyphens: auto; /* divide palavras longas (pt-br, do <html lang>) e evita buracos entre as palavras */
+  hyphens: auto;
+}
+
+@media (max-width: 768px) {
+  .who-we-are__layout {
+    grid-template-columns: 1fr;
+  }
+}

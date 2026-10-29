@@ -1,0 +1,102 @@
+.navbar {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: var(--navbar-height);
+  background: var(--navbar-bg);
+  border-bottom: 3px solid var(--color-logo-green);
+  z-index: var(--navbar-z-index);
+}
+
+.navbar-container {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar-brand img {
+  height: 40px;
+}
+
+/* menu antes do botão de orçamento */
+.navbar-menu {
+  order: 1;
+  display: flex;
+  gap: 1rem;
+  margin-right: 1.5rem;
+}
+
+.navbar-menu a {
+  padding: 0.5rem;
+  border-bottom: 2px solid transparent; /* reserva o espaço do hover, o texto não pula */
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  transition: color 0.3s, border-bottom 0.3s;
+}
+
+.navbar-menu a:hover {
+  color: var(--color-logo-green);
+  border-bottom: 2px solid var(--color-logo-green);
+}
+
+.nav-container-flex {
+    display: flex;  
+    align-items: center;
+}
+
+.nav-btn-container {
+  order: 2;
+}
+
+.navbar-toggle {
+  order: 3;
+  display: none;
+  font-size: 1.8rem;
+  background: none;
+  border: 0;
+  color: var(--color-neutral-40);
+}
+
+@media (max-width: 768px) {
+  .navbar-toggle {
+    display: block;
+  }
+
+  .nav-btn-container {
+    margin-right: 1rem;
+  }
+
+  .navbar-menu {
+    position: absolute;
+    top: var(--navbar-height);
+    right: 0;
+    flex-direction: column;
+    margin-right: 0;
+    width: 40%;
+    max-width: 0;
+    overflow: hidden;
+    background: var(--navbar-bg);
+        transition:
+            max-width 0.8s ease-in-out,
+            padding 0.4s ease;
+  }
+
+  .navbar-menu.is-open {
+    max-width: 500px;
+  }
+
+  .navbar-menu li {
+    text-align: center;
+    margin: 1rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .navbar-container {
+    padding: 1rem 1rem;
+  }
+}

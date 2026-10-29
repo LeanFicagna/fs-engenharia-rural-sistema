@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+
+    <!-- Online, esta página é servida em qualquer endereço que não exista (ex.: /a/b), então os caminhos
+         partem da raiz do site. Aberta direto do disco (file://), valem os caminhos relativos à pasta. -->
+    <script>
+        if (location.protocol !== "file:") document.write('<base href="/">');
+    </script>
+
+    <link rel="icon" href="favicon.png" type="image/png" />
+
+    <link rel="stylesheet" href="css/reset.css" />
+    <link rel="stylesheet" href="css/variables.css" />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/components/button.css" />
+
+    <title>Página não encontrada | FS Consultoria Rural</title>
+
+    <style>
+        body {
+            margin-top: 0;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 1.5rem;
+            padding: 2rem 1rem;
+            text-align: center;
+            background: var(--color-neutral-10);
+            border-top: 3px solid var(--color-logo-green);
+            border-bottom: 3px solid var(--color-logo-green);
+        }
+
+        .not-found__code {
+            font-size: 5rem;
+            font-weight: 700;
+            line-height: 1;
+            color: var(--color-logo-green);
+        }
+
+        .not-found p {
+            margin: 0;
+        }
+
+        .btn--primary {
+            background: var(--color-logo-green);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <img src="img/logo/fs-consultoria-rural-horizontal.webp" alt="FS Consultoria Rural" width="230" height="40" />
+
+    <main class="not-found">
+        <p class="not-found__code">404</p>
+        <h1>Página não encontrada</h1>
+        <p>O endereço que você acessou não existe ou foi movido.</p>
+    </main>
+
+    <a href="index.html" class="btn btn--primary">Voltar para o início</a>
+</body>
+
+</html>

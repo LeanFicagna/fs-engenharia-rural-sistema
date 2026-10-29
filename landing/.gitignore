@@ -1,0 +1,7 @@
+/file/
+
+# Sistema operacional e editor
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/

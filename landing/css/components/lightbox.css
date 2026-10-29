@@ -1,0 +1,121 @@
+/* Galeria em tela cheia das fotos do "Conheça nosso dia a dia" (criada pelo script/gallery.js) */
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 3000; /* acima da barra superior */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 4.5rem;
+  background: rgba(10, 10, 10, 0.92);
+}
+
+.lightbox__figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  max-width: 100%;
+  max-height: 100%;
+  margin: 0;
+}
+
+.lightbox__img {
+  max-width: min(1100px, 100%);
+  max-height: calc(100vh - 8rem);
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  border-radius: 0.6rem;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+}
+
+.lightbox__caption {
+  color: white;
+  font-weight: 600;
+  text-align: center;
+}
+
+.lightbox__counter {
+  margin: 0;
+  color: var(--color-neutral-30);
+  font-size: 0.85rem;
+}
+
+/* Botões: círculo escuro translúcido com ícone branco, como as setas do carrossel de serviços */
+.lightbox__button {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.12);
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease, border-color 0.3s ease;
+}
+
+.lightbox__button:hover,
+.lightbox__button:focus-visible {
+  background: rgba(255, 255, 255, 0.25);
+  border-color: var(--color-logo-green);
+  outline: none;
+}
+
+.lightbox__button svg {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+.lightbox__prev {
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__next {
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.lightbox__close {
+  top: 1rem;
+  right: 1rem;
+}
+
+/* Trava a rolagem da página enquanto a galeria está aberta */
+.lightbox-open {
+  overflow: hidden;
+}
+
+@media (max-width: 600px) {
+  .lightbox {
+    padding: 4rem 0.75rem 5.5rem;
+  }
+
+  .lightbox__img {
+    max-height: calc(100vh - 12rem);
+  }
+
+  /* No celular as setas vão para baixo da foto, para não cobrirem a imagem */
+  .lightbox__prev,
+  .lightbox__next {
+    top: auto;
+    bottom: 1.25rem;
+    transform: none;
+  }
+
+  .lightbox__prev {
+    left: calc(50% - 3.5rem);
+  }
+
+  .lightbox__next {
+    right: calc(50% - 3.5rem);
+  }
+}
