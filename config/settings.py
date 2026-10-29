@@ -96,6 +96,11 @@ STORAGES = {
     "staticfiles": {"BACKEND": "whitenoise.storage.CompressedStaticFilesStorage"},
 }
 
+# A landing page (pasta landing/) é servida na raiz do site pelo WhiteNoise;
+# "/" entrega o landing/index.html e o painel fica em /painel/
+WHITENOISE_ROOT = BASE_DIR / "landing"
+WHITENOISE_INDEX_FILE = True
+
 # No Render (HTTPS por trás de proxy): cookies só por HTTPS
 if os.environ.get("RENDER"):
     SECURE_PROXY_SSL_HEADER = ("HTTP_X_FORWARDED_PROTO", "https")
