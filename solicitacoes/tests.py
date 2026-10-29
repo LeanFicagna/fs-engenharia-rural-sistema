@@ -194,3 +194,25 @@ class CadastroUsuarioTests(TestCase):
 
         self.assertEqual(resposta.status_code, 403)
         self.assertFalse(User.objects.filter(email="intruso@example.com").exists())
+
+
+class RotasTests(TestCase):
+    def test_raiz_mostra_a_landing_page(self):
+        resposta = self.client.get("/")
+
+        self.assertEqual(resposta.status_code, 200)
+        self.assertEqual(resposta["Content-Type"].split(";")[0], "text/html")
+        self.assertContains(resposta, 'id="contact-form"')
+        # Arquivos da landing com caminho relativo também respondem na raiz
+        self.assertEqual(self.client.get("/script/contact.js").status_code, 200)
+
+    def test_painel_fica_em_painel_e_exige_login(self):
+        self.assertEqual(reverse("lista"), "/painel/")
+        self.assertEqual(reverse("login"), "/painel/entrar/")
+
+        resposta = self.client.get("/painel/")
+
+        self.assertRedirects(resposta, "/painel/entrar/?next=/painel/")
+
+    def test_api_continua_em_api_solicitacoes(self):
+        self.assertEqual(reverse("api-criar-solicitacao"), "/api/solicitacoes/")
